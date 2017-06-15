@@ -126,8 +126,6 @@ const SimpleApp = StackNavigator({
   ReportNum: {screen: ReportNumber},
   History: {screen: History},
   QrCode: {screen: QrCode},
-
-
 },{ headerMode: 'screen' });
 module.exports = SimpleApp;
 

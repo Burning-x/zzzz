@@ -73,6 +73,9 @@ export default class Report extends Component {
       avatarSource: null,
       text: '',
       height: 1,
+      deviceId: '',
+      deviceName: '',
+      location: '',
     }
     this._onChangeText = this._onChangeText.bind(this);
     this._onContentSizeChange = this._onContentSizeChange.bind(this);
@@ -124,7 +127,6 @@ export default class Report extends Component {
           array = this.state.avatarSource;
         }
         array.push(source);
-
         /*let array = [];
         console.log(this.state.avatarSource.Response);
         if (this.state.avatarSource) {
@@ -178,6 +180,9 @@ export default class Report extends Component {
   _submit() {
     const { navigate } = this.props.navigation;
     return navigate("Main");
+  }
+
+  _getInfo() {
 
   }
   _onContentSizeChange() {
@@ -192,7 +197,7 @@ export default class Report extends Component {
           <View style={[styles.items]}>
             <View  style={styles.itemMargin}>
               <Text style={styles.titleText}>设备编号</Text>
-              <Text>编号89757</Text>
+              <Text>{that.state.deviceId}</Text>
               <TouchableOpacity
                 style={styles.prCode}
                 onPress={() => navigate('QrCode')}>
@@ -206,13 +211,23 @@ export default class Report extends Component {
 
           <View style={[styles.items]}>
             <View  style={styles.itemMargin}>
-              <Text>设备名称</Text>
+              <Text style={styles.titleText}>设备名称</Text>
+              <Text>{that.state.deviceName}</Text>
+              {/*<TouchableOpacity
+                style={styles.prCode}
+                onPress={() => navigate('QrCode')}>
+                <Image
+                  style={styles.nextPage}
+                  source={require('../images/troubleReport/report_1/下一级.png')}/>
+              </TouchableOpacity>*/}
+
             </View>
           </View>
 
           <View style={[styles.items]}>
             <View  style={styles.itemMargin}>
-              <Text>区域位置</Text>
+              <Text style={styles.titleText}>区域位置</Text>
+              <Text>{that.state.location}</Text>
             </View>
           </View>
 
