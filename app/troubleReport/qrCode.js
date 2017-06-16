@@ -38,7 +38,7 @@ import ViewFinder from './ViewFinder';
 
 /*import backIcon from '../images/troubleReport/report_1/返回箭头.png';//返回按钮
 import scanLine from '../images/troubleReport/report_1/扫描线.png';//扫描线*/
-
+import SelfInput from './selfInput';
 export default class Scan extends Component {
   constructor(props) {
     super(props);
@@ -64,9 +64,9 @@ export default class Scan extends Component {
   static navigationOptions = ({ navigation }) => {
     const {state, setParams} = navigation;
     {
-      console.log(this.state)
+      console.log(this)
     }
-    let title = this.state.title;
+    //let title = this.state.title;
     let inits = {
       title: '扫码录入',
     }
@@ -77,6 +77,8 @@ export default class Scan extends Component {
   }
   componentDidMount() {
     this._startAnimation(false);
+    const {params} = this.props.navigation.state;
+    console.log(params);
   }
   //开始动画，循环播放
   _startAnimation(isEnd) {
@@ -101,9 +103,15 @@ export default class Scan extends Component {
     //console.log("开始动画");
   }
   _selfInput() {
-    this.setState({
+    //this.props.navigation('SelfInput');
+    let { navigate } = this.props.navigation;
+    let init = {
+      title: '手动录入',
+    }
+    return navigate('SelfInput',init={init});
+    /*this.setState({
       selfInput: true,
-    })
+    })*/
     /*console.log(this.props);
      this.props.navigation.navigation.goBack();
      console.log('cccc');*/
@@ -114,10 +122,14 @@ export default class Scan extends Component {
       this.transCode = e.data; // 放在this上，防止触发多次，setstate有延时
       if(this.state.flag){
         this.changeState(false);
-        console.log(e)
+        //console.log(e);
         //通过条码编号获取数据
       }
-      console.log("transCode="+this.transCode);
+
+      //console.log(typeof this.transCode);
+      let aaa = parseInt(this.transCode);
+      //let ssss = JSON.parse(this.transCode);
+      this.props.navigation.navigate('Report',{transCode:aaa});
     }
   }
   //返回按钮点击事件
@@ -146,13 +158,11 @@ export default class Scan extends Component {
       openFlash,
       active,
     } = this.state;
-    if (this.state.selfInput){
+    /*if (this.state.selfInput){
       return (
-        <View>
-          <Text>hello</Text>
-        </View>
+        <SelfInput/>
       )
-    }
+    }*/
 
     return(
       <View style={styles.allContainer}>

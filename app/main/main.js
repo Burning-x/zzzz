@@ -19,6 +19,7 @@ import { StackNavigator } from 'react-navigation';
 import ReportNumber from '../troubleReport/reportNum';
 import History from '../troubleReport/test';
 import QrCode from '../troubleReport/qrCode';
+import SelfInput from '../troubleReport/selfInput';
 
 const {width, height} = Dimensions.get('window');
 
@@ -126,6 +127,8 @@ const SimpleApp = StackNavigator({
   ReportNum: {screen: ReportNumber},
   History: {screen: History},
   QrCode: {screen: QrCode},
+  SelfInput: {screen: SelfInput},
+
 },{ headerMode: 'screen' });
 module.exports = SimpleApp;
 

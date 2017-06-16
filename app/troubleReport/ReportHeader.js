@@ -61,33 +61,30 @@ const styles = {
   },
   back: {
     justifyContent: 'center',
-    flex: 1,
+    flex: 2,
   },
   backPic: {
     alignSelf: 'center',
     justifyContent: 'center',
-    /*borderColor: 'blue',
-     borderWidth: 1,*/
   },
   title: {
-    flex: 5,
+    flex: 6,
     justifyContent: 'center',
     //alignSelf: 'center',
   },
   titleName: {
     textAlign:'center',
     color: '#ffffff',
-    fontSize: 18,
-    //marginLeft: 90,
+    fontSize: 17,
   },
   titleRight: {
     flex: 2,
     justifyContent: 'center',
   },
   history: {
+    alignSelf: 'center',
+    justifyContent: 'center',
     fontSize: 12,
-    alignItems: 'center',
-    textAlign: 'center',
     color: '#ffffff',
   }
 }

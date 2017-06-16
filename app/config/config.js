@@ -14,5 +14,6 @@ module.exports = {
     //base: 'http://192.168.2.190:8080/',
     base:'http://rapapi.org/mockjs/19098/',
     queryUser: 'weyland/queryUser',
+    getCode: 'weyland/getCode',
   }
 }
