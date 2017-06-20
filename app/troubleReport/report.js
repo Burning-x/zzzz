@@ -27,9 +27,6 @@ const resetAction = NavigationActions.reset({
   ]
 })
 
-
-
-
 var options = {//上传图片控件参数
   title: '选择照片',
   takePhotoButtonTitle: '拍照',
@@ -90,7 +87,7 @@ export default class Report extends Component {
     this._submit = this._submit.bind(this);
     this._getInfo = this._getInfo.bind(this);
   }
-  static navigationOptions = ({ navigation }) => {
+  static navigationOptions = ({ navigation }) => {//设置导航栏头部
     const {state, setParams} = navigation;
     return {
       header: <View style={stylesHeader.header}>
@@ -106,7 +103,7 @@ export default class Report extends Component {
         </View>
         <TouchableOpacity
           style={stylesHeader.titleRight}
-          onPress={() => navigate('History')}>
+          onPress={() => navigation.navigate('History')}>
           <Text style={stylesHeader.history}>历史记录</Text>
         </TouchableOpacity>
       </View>
@@ -248,7 +245,7 @@ export default class Report extends Component {
               <Text>{that.state.location}</Text>
               <TouchableOpacity
                 style={styles.prCode}
-                onPress={() => navigate('QrCode',{user:this._getInfo})}>
+                onPress={() => navigate('Location',{user:this._getInfo})}>
                 <Image
                   style={styles.nextPage}
                   source={require('../images/troubleReport/report_1/下一级.png')}/>

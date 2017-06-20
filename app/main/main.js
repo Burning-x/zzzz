@@ -17,9 +17,10 @@ import {
 import Report from '../troubleReport/report';
 import { StackNavigator } from 'react-navigation';
 import ReportNumber from '../troubleReport/reportNum';
-import History from '../troubleReport/test';
+import History from '../troubleReport/history';
 import QrCode from '../troubleReport/qrCode';
 import SelfInput from '../troubleReport/selfInput';
+import Location from '../troubleReport/location';
 
 const {width, height} = Dimensions.get('window');
 
@@ -121,13 +122,15 @@ export default class Main extends Component{
   }
 }
 
-const SimpleApp = StackNavigator({
+const SimpleApp = StackNavigator({//在此为导航栏到各个页面的页面名称
   Home: { screen: Main},
   Report: { screen: Report },
   ReportNum: {screen: ReportNumber},
   History: {screen: History},
   QrCode: {screen: QrCode},
   SelfInput: {screen: SelfInput},
+  Location: {screen: Location},
+
 
 },{ headerMode: 'screen' });
 module.exports = SimpleApp;
