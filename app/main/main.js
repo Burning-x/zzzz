@@ -21,6 +21,7 @@ import History from '../troubleReport/history';
 import QrCode from '../troubleReport/qrCode';
 import SelfInput from '../troubleReport/selfInput';
 import Location from '../troubleReport/location';
+import OrderProcess from '../workOrder/orderProcess';
 
 const {width, height} = Dimensions.get('window');
 
@@ -75,7 +76,6 @@ export default class Main extends Component{
               <TouchableOpacity
                 style={styles.headerDownRight}
                 onPress={() => navigate('Report')}
-                title="Chat with Lucy"
               >
                   <Image source={require('../images/main/故障上报.png')}/>
                   <Text style={styles.headerText}>日常上报</Text>
@@ -85,11 +85,12 @@ export default class Main extends Component{
         <View style={styles.contenMid}>
           <View style={styles.contenMidIn}>
             <View style={styles.contenMidInTop}>
-              <View style={styles.contenMidInTopLeft}>
+              <TouchableOpacity style={styles.contenMidInTopLeft}
+                                onPress={() => navigate('OrderProcess')}>
                 <Image source={require('../images/main/工单.png')}/>
                 <Text style={styles.headerText}>工单处理</Text>
                 <Text style={styles.headerTextHandle}>您有5条工单未处理</Text>
-              </View>
+              </TouchableOpacity>
               <View style={styles.contenMidInTopRight}>
                 <View style={styles.contenMidInTopUp}>
                   <Image source={require('../images/main/人员定位.png')}/>
@@ -130,6 +131,7 @@ const SimpleApp = StackNavigator({//在此为导航栏到各个页面的页面�
   QrCode: {screen: QrCode},
   SelfInput: {screen: SelfInput},
   Location: {screen: Location},
+  OrderProcess: {screen: OrderProcess},
 
 
 },{ headerMode: 'screen' });

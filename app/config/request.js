@@ -9,6 +9,7 @@ request.get = function (url, params) {
   if (params) {
     url += '?' + queryString.stringify(params);
   }
+  console.log(url);
   return fetch(url)
     .then((response) => response.json())
     .catch((error) => {

@@ -15,5 +15,7 @@ module.exports = {
     base:'http://rapapi.org/mockjs/19098/',
     queryUser: 'weyland/queryUser',
     getCode: 'weyland/getCode',
+    getHistory: 'weyland/history',
+    getTrcList: 'weyland/trclist',
   }
 }

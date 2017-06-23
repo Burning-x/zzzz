@@ -25,7 +25,7 @@ const resetAction = NavigationActions.reset({
   actions: [
     NavigationActions.navigate({ routeName: 'Home'})
   ]
-})
+});
 
 var options = {//上传图片控件参数
   title: '选择照片',
