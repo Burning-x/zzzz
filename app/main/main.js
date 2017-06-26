@@ -25,6 +25,9 @@ import OrderProcess from '../workOrder/orderMain';
 import StartInspection from '../workOrder/orderInspection/startInspection';
 import OrderMaintain from '../workOrder/orderMaintain/orderMaintain';
 import OrderTraffic from '../workOrder/orderTraffic/orderTraffic';
+import EndInspection from '../workOrder/orderInspection/endInspection';
+import EndMaintain from '../workOrder/orderMaintain/endMaintain';
+import EndTraffic from '../workOrder/orderTraffic/endTraffic';
 
 const {width, height} = Dimensions.get('window');
 
@@ -137,8 +140,9 @@ const SimpleApp = StackNavigator({//在此为导航栏到各个页面的页面�
   StartInspection: {screen: StartInspection},
   OrderMaintain: {screen: OrderMaintain},
   OrderTraffic: {screen: OrderTraffic},
-
-
+  EndInspection: {screen: EndInspection},
+  EndMaintain: {screen: EndMaintain},
+  EndTraffic: {screen: EndTraffic},
 },{ headerMode: 'screen' });
 module.exports = SimpleApp;
 

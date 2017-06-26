@@ -1,4 +1,7 @@
 /**
+ * Created by admin on 2017/6/26.
+ */
+/**
  * Created by admin on 2017/6/23.
  */
 import React, { Component } from 'react';
@@ -12,10 +15,19 @@ import {
 } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
+import { NavigationActions } from 'react-navigation';
+const resetAction = NavigationActions.reset({
+  index: 1,
+  actions: [
+    NavigationActions.navigate({ routeName: 'Home'}),
+    NavigationActions.navigate({ routeName: 'OrderProcess'},init={init:'1111111'}),
+  ]
+});
 
 export default class OrderTraffic extends Component {
   constructor(props) {
     super(props);
+    console.log('aaa');
     console.log(props.navigation.state.params.data);
   }
   static navigationOptions = ({ navigation }) => {//设置导航栏头部
@@ -38,7 +50,7 @@ export default class OrderTraffic extends Component {
     }
   };
   render() {
-    let { navigate } = this.props.navigation;
+    let that = this;
     return (
       <View style={styles.container}>
         <View  style={styles.outerContainer}>
@@ -85,7 +97,7 @@ export default class OrderTraffic extends Component {
         </View>
         <View style={styles.bottomContainer}>
           <TouchableOpacity
-            onPress={() => navigate('EndMaintain')}
+            onPress={() => that.props.navigation.dispatch(resetAction)}
             style={styles.startInspection}
           >
             <Text style={styles.startText}>开始保养</Text>

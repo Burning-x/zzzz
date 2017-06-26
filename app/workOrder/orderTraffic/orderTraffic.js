@@ -39,6 +39,7 @@ export default class OrderTraffic extends Component {
     }
   };
   render() {
+    let { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         <View  style={styles.outerContainer}>
@@ -85,6 +86,7 @@ export default class OrderTraffic extends Component {
         </View>
         <View style={styles.bottomContainer}>
           <TouchableOpacity
+            onPress={() => navigate('EndTraffic')}
             style={styles.startInspection}
           >
             <Text style={styles.startText}>开始保养</Text>

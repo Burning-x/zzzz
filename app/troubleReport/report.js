@@ -314,7 +314,6 @@ const stylesHeader = StyleSheet.create({
   title: {
     flex: 5,
     justifyContent: 'center',
-    //alignSelf: 'center',
   },
   titleName: {
     textAlign:'center',

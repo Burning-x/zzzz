@@ -17,8 +17,6 @@ export default class InputSelf extends Component {
     this._onChange = this._onChange.bind(this);
   }
   _onChange(event) {
-    console.log(event.nativeEvent)
-    console.log("ccccaaa");
     let height = event.nativeEvent.contentSize.height;
     let text = event.nativeEvent.text;
     this.setState({
@@ -46,6 +44,5 @@ const styles = {
     paddingTop: 0,
     paddingBottom: 0,
     color:'#666666',
-  //backgroundColor: "grey",
 }
 }

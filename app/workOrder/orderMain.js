@@ -46,6 +46,7 @@ class MainList extends Component {
         dataSource: that.state.dataSource.cloneWithRows(mockData.data),
       });
       })
+
   }
   _inspecting() {
 

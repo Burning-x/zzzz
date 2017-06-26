@@ -16,8 +16,6 @@ const { width, height } = Dimensions.get('window');
 export default class OrderTraffic extends Component {
   constructor(props) {
     super(props);
-    console.log('aaa');
-    console.log(props.navigation.state.params.data);
   }
   static navigationOptions = ({ navigation }) => {//设置导航栏头部
     const {state, setParams} = navigation;
@@ -39,6 +37,7 @@ export default class OrderTraffic extends Component {
     }
   };
   render() {
+    let { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         <View  style={styles.outerContainer}>
@@ -85,6 +84,7 @@ export default class OrderTraffic extends Component {
         </View>
         <View style={styles.bottomContainer}>
           <TouchableOpacity
+            onPress={() => navigate('EndInspection')}
             style={styles.startInspection}
           >
             <Text style={styles.startText}>开始保养</Text>
