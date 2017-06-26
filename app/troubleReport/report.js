@@ -116,8 +116,6 @@ export default class Report extends Component {
 
       let url = config.api.base + config.api.getCode;
       let body = {deviceId: params.transCode};
-      console.log(url);
-      console.log(body);
       request.post(url,body)
         .then((data) => {
         let sss = Mock.mock(data);

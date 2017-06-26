@@ -29,9 +29,10 @@ class MainList extends Component {
     super(props);
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(['row 1', 'row 2']),
+      dataSource: ds.cloneWithRows(['a1','b2']),
     };
     this._getList = this._getList.bind(this);
+
   }
   componentDidMount() {
     let that = this;
@@ -50,20 +51,27 @@ class MainList extends Component {
 
   }
 
+  toInfo() {
+    let { navigate } = this.props.navigation;
+    navigate(orderPage[type]);
+  }
+
   _getList(data) {
     let { navigate } = this.props.navigation;
-
+    const orderArr = {'t3': '保养单','t2': '故障单','t1': '巡检单'};
+    const orderPage = {'t1': 'StartInspection','t2': 'OrderTraffic','t3': 'OrderMaintain'};
     let type = "";
-    if (data.orderType < 30000) {
-      type = '保养单';
-    } else if (data.orderType < 60000) {
-      type = '故障单';
+    if (data.orderType < 10) {
+      type = 't1';
+    } else if (10 <= data.orderType < 20) {
+      type = 't2';
     } else {
-      type = '巡检单';
+      type = 't3';
     }
+
     return (
     <TouchableOpacity
-      onPress={() => navigate('Home')}
+      onPress={() => navigate(orderPage[type], data={data})}
       style={styles.outerContent}>
       <View style={styles.orderContent}>
         <View style={styles.allTitle}>
@@ -71,7 +79,7 @@ class MainList extends Component {
           <Text style={styles.ordered}>{data.ordered ? '完成' : '未完成'}</Text>
         </View>
         <View style={styles.timestamp}>
-          <Text style={styles.orderColor}>工单类型：{type}</Text>
+          <Text style={styles.orderColor}>工单类型：{orderArr[type]}</Text>
           <Text style={styles.orderColor}>截止日期：{data.lastdate}</Text>
         </View>
       </View>
@@ -91,6 +99,8 @@ class MainList extends Component {
         </TouchableOpacity>
         <View style={stylesHeader.title}>
           <Text style={stylesHeader.titleName}>工单处理</Text>
+        </View>
+        <View style={stylesHeader.empty}>
         </View>
       </View>,
       tabBarLabel: '全部工单',
@@ -135,16 +145,21 @@ const stylesHeader = StyleSheet.create({
   },
   back: {
     justifyContent: 'center',
-    flex: 1,
+    flex: 2,
   },
   backPic: {
     alignSelf: 'center',
     justifyContent: 'center',
   },
   title: {
-    flex: 6,
+    flex: 5,
     justifyContent: 'center',
     //alignSelf: 'center',
+  },
+  empty: {
+    flex: 2,
+    /*borderColor: 'red',
+    borderWidth: 1,*/
   },
   titleName: {
     textAlign:'center',

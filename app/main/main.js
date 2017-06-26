@@ -21,10 +21,12 @@ import History from '../troubleReport/history';
 import QrCode from '../troubleReport/qrCode';
 import SelfInput from '../troubleReport/selfInput';
 import Location from '../troubleReport/location';
-import OrderProcess from '../workOrder/orderProcess';
+import OrderProcess from '../workOrder/orderMain';
+import StartInspection from '../workOrder/orderInspection/startInspection';
+import OrderMaintain from '../workOrder/orderMaintain/orderMaintain';
+import OrderTraffic from '../workOrder/orderTraffic/orderTraffic';
 
 const {width, height} = Dimensions.get('window');
-
 
 export default class Main extends Component{
   static navigationOptions = {
@@ -132,6 +134,9 @@ const SimpleApp = StackNavigator({//在此为导航栏到各个页面的页面�
   SelfInput: {screen: SelfInput},
   Location: {screen: Location},
   OrderProcess: {screen: OrderProcess},
+  StartInspection: {screen: StartInspection},
+  OrderMaintain: {screen: OrderMaintain},
+  OrderTraffic: {screen: OrderTraffic},
 
 
 },{ headerMode: 'screen' });
