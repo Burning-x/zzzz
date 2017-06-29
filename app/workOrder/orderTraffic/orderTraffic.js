@@ -11,16 +11,19 @@ import {
   Image,
 } from 'react-native';
 
+import config from '../../config/config';
+import request from '../../config/request';
+
 const { width, height } = Dimensions.get('window');
 
 export default class OrderTraffic extends Component {
   constructor(props) {
     super(props);
-    console.log('aaa');
-    console.log(props.navigation.state.params.data);
+    this.state = {
+      data: props.navigation.state.params.data,
+    }
   }
   static navigationOptions = ({ navigation }) => {//设置导航栏头部
-    const {state, setParams} = navigation;
     return {
       header: <View style={stylesHeader.header}>
         <TouchableOpacity
@@ -31,41 +34,50 @@ export default class OrderTraffic extends Component {
             source={require('../../images/troubleReport/report_1/返回箭头.png')}/>
         </TouchableOpacity>
         <View style={stylesHeader.title}>
-          <Text style={stylesHeader.titleName}>故障上报</Text>
+          <Text style={stylesHeader.titleName}>故障处理</Text>
         </View>
         <View style={stylesHeader.empty}>
         </View>
       </View>
     }
   };
+
   render() {
     let { navigate } = this.props.navigation;
+    let data = this.state.data;
     return (
       <View style={styles.container}>
         <View  style={styles.outerContainer}>
           <View style={styles.inContainer}>
             <View style={styles.marginLeft}>
-              <Text>工单类型</Text>
+              <Text style={styles.leftText}>工单类型</Text>
+              <Text style={styles.leftText}>故障单</Text>
+            </View>
+          </View>
+
+
+          <View style={styles.inContainer}>
+            <View style={styles.marginLeft}>
+              <Text style={styles.leftText}>设备编号</Text>
+              <Text style={styles.leftText}>{data.deviceId}</Text>
             </View>
           </View>
           <View style={styles.inContainer}>
             <View style={styles.marginLeft}>
-              <Text>设备编号</Text>
+              <Text style={styles.leftText}>设备名称</Text>
+              <Text style={styles.leftText}>{data.deviceName}</Text>
             </View>
           </View>
           <View style={styles.inContainer}>
             <View style={styles.marginLeft}>
-              <Text>设备名称</Text>
+              <Text style={styles.leftText}>区域位置</Text>
+              <Text style={styles.leftText}>{data.location}</Text>
             </View>
           </View>
           <View style={styles.inContainer}>
             <View style={styles.marginLeft}>
-              <Text>区域位置</Text>
-            </View>
-          </View>
-          <View style={styles.inContainer}>
-            <View style={styles.marginLeft}>
-              <Text>保养内容</Text>
+              <Text style={styles.leftText}>故障描述</Text>
+              <Text style={styles.leftText}>{data.content}</Text>
             </View>
           </View>
           <View style={styles.inContainer}>
@@ -75,14 +87,25 @@ export default class OrderTraffic extends Component {
           </View>
           <View style={styles.inContainer}>
             <View style={styles.marginLeft}>
-              <Text>联系厂家</Text>
+              <Text style={styles.leftText}>联系厂家</Text>
+              <Text style={styles.leftText}>{data.factory}</Text>
             </View>
           </View>
           <View style={styles.inContainer}>
             <View style={styles.marginLeft}>
-              <Text>截止日期</Text>
+              <Text style={styles.leftText}>截止日期</Text>
+              <Text style={styles.leftText}>{data.lastdate}</Text>
             </View>
           </View>
+
+          <View style={styles.inContainer}>
+            <Text>图片</Text>
+            <Image
+                source={{uri:data.image}}
+                style={styles.images}>
+            </Image>
+          </View>
+
         </View>
         <View style={styles.bottomContainer}>
           <TouchableOpacity
@@ -99,22 +122,35 @@ export default class OrderTraffic extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection:'column',
   },
   outerContainer: {
     flex: 7,
-
+    flexDirection: 'column',
+    //justifyContent: 'center',
   },
   inContainer: {
     flex: 1,
+    justifyContent: 'center',
     borderBottomColor: '#ccc',
     borderBottomWidth: 1,
+    /*borderWidth: 1,
+    borderColor:'red',*/
   },
 
   marginLeft: {
-    justifyContent: 'center',
-    flex: 1,
+    flexDirection: 'row',
+    /*borderWidth: 1,
+    borderColor:'red',*/
+    justifyContent: 'space-between',
+    //flex: 1,
     marginLeft: 10,
 
+  },
+  leftText: {
+    width: 100,
+    /*borderWidth: 1,
+    borderColor:'red',*/
   },
   bottomContainer: {
     flex: 4,
@@ -133,6 +169,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#ffffff',
   },
+  images: {
+    height: 20,
+    width: 20,
+  }
 });
 const stylesHeader = StyleSheet.create({
   header: {

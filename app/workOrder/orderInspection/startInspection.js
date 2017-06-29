@@ -16,6 +16,9 @@ const { width, height } = Dimensions.get('window');
 export default class OrderTraffic extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      data: props.navigation.state.params.data,
+    }
   }
   static navigationOptions = ({ navigation }) => {//设置导航栏头部
     const {state, setParams} = navigation;
@@ -29,7 +32,7 @@ export default class OrderTraffic extends Component {
             source={require('../../images/troubleReport/report_1/返回箭头.png')}/>
         </TouchableOpacity>
         <View style={stylesHeader.title}>
-          <Text style={stylesHeader.titleName}>故障上报</Text>
+          <Text style={stylesHeader.titleName}>工单--巡检</Text>
         </View>
         <View style={stylesHeader.empty}>
         </View>
@@ -38,19 +41,24 @@ export default class OrderTraffic extends Component {
   };
   render() {
     let { navigate } = this.props.navigation;
+    let data = this.state.data;
     return (
       <View style={styles.container}>
         <View  style={styles.outerContainer}>
           <View style={styles.inContainer}>
             <View style={styles.marginLeft}>
-              <Text>工单类型</Text>
+              <Text style={styles.leftText}>工单类型</Text>
+              <Text style={styles.leftText}>巡检单</Text>
             </View>
           </View>
+
           <View style={styles.inContainer}>
             <View style={styles.marginLeft}>
-              <Text>设备编号</Text>
+              <Text style={styles.leftText}>设备编号</Text>
+              <Text style={styles.leftText}>{data.deviceId}</Text>
             </View>
           </View>
+
           <View style={styles.inContainer}>
             <View style={styles.marginLeft}>
               <Text>设备名称</Text>

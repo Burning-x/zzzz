@@ -16,7 +16,9 @@ const { width, height } = Dimensions.get('window');
 export default class OrderTraffic extends Component {
   constructor(props) {
     super(props);
-    console.log(props.navigation.state.params.data);
+    this.state = {
+      data: props.navigation.state.params.data,
+    }
   }
   static navigationOptions = ({ navigation }) => {//设置导航栏头部
     const {state, setParams} = navigation;
@@ -30,7 +32,7 @@ export default class OrderTraffic extends Component {
             source={require('../../images/troubleReport/report_1/返回箭头.png')}/>
         </TouchableOpacity>
         <View style={stylesHeader.title}>
-          <Text style={stylesHeader.titleName}>故障上报</Text>
+          <Text style={stylesHeader.titleName}>工单--保养</Text>
         </View>
         <View style={stylesHeader.empty}>
         </View>
@@ -39,6 +41,7 @@ export default class OrderTraffic extends Component {
   };
   render() {
     let { navigate } = this.props.navigation;
+    let data = this.state.data;
     return (
       <View style={styles.container}>
         <View  style={styles.outerContainer}>
@@ -47,21 +50,25 @@ export default class OrderTraffic extends Component {
               <Text>工单类型</Text>
             </View>
           </View>
+
           <View style={styles.inContainer}>
             <View style={styles.marginLeft}>
               <Text>设备编号</Text>
             </View>
           </View>
+
           <View style={styles.inContainer}>
             <View style={styles.marginLeft}>
               <Text>设备名称</Text>
             </View>
           </View>
+
           <View style={styles.inContainer}>
             <View style={styles.marginLeft}>
               <Text>区域位置</Text>
             </View>
           </View>
+
           <View style={styles.inContainer}>
             <View style={styles.marginLeft}>
               <Text>保养内容</Text>
@@ -98,22 +105,35 @@ export default class OrderTraffic extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection:'column',
   },
   outerContainer: {
     flex: 7,
-
+    flexDirection: 'column',
+    //justifyContent: 'center',
   },
   inContainer: {
     flex: 1,
+    justifyContent: 'center',
     borderBottomColor: '#ccc',
     borderBottomWidth: 1,
+    borderWidth: 1,
+    borderColor:'red',
   },
 
   marginLeft: {
-    justifyContent: 'center',
-    flex: 1,
+    flexDirection: 'row',
+    borderWidth: 1,
+    borderColor:'red',
+    justifyContent: 'space-between',
+    //flex: 1,
     marginLeft: 10,
 
+  },
+  leftText: {
+    width: 100,
+    borderWidth: 1,
+    borderColor:'red',
   },
   bottomContainer: {
     flex: 4,

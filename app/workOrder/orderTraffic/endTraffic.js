@@ -1,9 +1,6 @@
 /**
  * Created by admin on 2017/6/26.
  */
-/**
- * Created by admin on 2017/6/23.
- */
 import React, { Component } from 'react';
 import {
   View,
@@ -28,7 +25,7 @@ export default class OrderTraffic extends Component {
   constructor(props) {
     super(props);
     console.log('aaa');
-    console.log(props.navigation.state.params.data);
+    //console.log(props.navigation.state.params.data);
   }
   static navigationOptions = ({ navigation }) => {//设置导航栏头部
     const {state, setParams} = navigation;
@@ -100,7 +97,7 @@ export default class OrderTraffic extends Component {
             onPress={() => that.props.navigation.dispatch(resetAction)}
             style={styles.startInspection}
           >
-            <Text style={styles.startText}>开始保养</Text>
+            <Text style={styles.startText}>提交</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -110,22 +107,35 @@ export default class OrderTraffic extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection:'column',
   },
   outerContainer: {
     flex: 7,
-
+    flexDirection: 'column',
+    //justifyContent: 'center',
   },
   inContainer: {
     flex: 1,
+    justifyContent: 'center',
     borderBottomColor: '#ccc',
     borderBottomWidth: 1,
+    borderWidth: 1,
+    borderColor:'red',
   },
 
   marginLeft: {
-    justifyContent: 'center',
-    flex: 1,
+    flexDirection: 'row',
+    borderWidth: 1,
+    borderColor:'red',
+    justifyContent: 'space-between',
+    //flex: 1,
     marginLeft: 10,
 
+  },
+  leftText: {
+    width: 100,
+    borderWidth: 1,
+    borderColor:'red',
   },
   bottomContainer: {
     flex: 4,
