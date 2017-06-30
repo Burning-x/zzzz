@@ -166,7 +166,7 @@ Viewfinder.defaultProps = {
   backgroundColor: 'transparent',
   borderWidth: 3,
   borderLength: 20,
-  color: 'blue',
+  color: '#5bb7f5',
   height: 220,
   isLoading: false,
   width: 220,

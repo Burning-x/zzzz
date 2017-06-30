@@ -8,6 +8,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
+  Dimensions,
   ListView,
 } from 'react-native';
 
@@ -24,6 +25,8 @@ const resetAction = NavigationActions.reset({
     NavigationActions.navigate({ routeName: 'Home'})
   ]
 });
+const { width, height } = Dimensions.get('window');
+const marginLeft = ((width / 3) - 90) / 2;
 class MainList extends Component {
   constructor(props) {
     super(props);
@@ -32,6 +35,9 @@ class MainList extends Component {
       dataSource: ds.cloneWithRows(['a1','b2']),
     };
     this._getList = this._getList.bind(this);
+    {
+      console.log('aaa');
+    }
 
   }
   componentDidMount() {
@@ -110,6 +116,7 @@ class MainList extends Component {
   render() {
     return (
       <ListView
+        style={styles.container}
         dataSource={this.state.dataSource}
         renderRow={this._getList}
       />
@@ -125,17 +132,26 @@ const OrderProcess = TabNavigator({
 },{
   tabBarOptions: {
     activeTintColor: '#5bb7f5',
+    inactiveTintColor: '#bebebe',
     labelStyle: {
-      fontSize: 12,
+      fontSize: 15,
     },
-    inactiveTintColor: '#ccc',
+    indicatorStyle: {
+      marginLeft: marginLeft ,
+      width: 90,
+      borderBottomColor: '#5bb7f5',
+      borderBottomWidth: 2,
+      //backgroundColor: 'red',
+    },
+    activeBackgroundColor: 'red',
     style: {
       backgroundColor: 'white',
+      borderBottomWidth: 1,
+      borderBottomColor: '#bfbfbf',
     },
 
   },
   backBehavior: 'none',
-  tabBarVisible: false,
 });
 
 const stylesHeader = StyleSheet.create({
@@ -155,12 +171,9 @@ const stylesHeader = StyleSheet.create({
   title: {
     flex: 5,
     justifyContent: 'center',
-    //alignSelf: 'center',
   },
   empty: {
     flex: 2,
-    /*borderColor: 'red',
-    borderWidth: 1,*/
   },
   titleName: {
     textAlign:'center',
@@ -169,6 +182,9 @@ const stylesHeader = StyleSheet.create({
   },
 });
 const styles = StyleSheet.create({
+  container:{
+    backgroundColor: 'white',
+  },
   outerContent: {
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',

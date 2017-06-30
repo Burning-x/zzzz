@@ -349,8 +349,6 @@ const styles = {
   itemMargin: {
     justifyContent: 'space-between',
     flexDirection:'row',
-    /*borderColor: 'red',
-    borderWidth: 1,*/
     marginLeft: 15,
     marginRight: 15,
   },
@@ -359,8 +357,6 @@ const styles = {
   },
   prCode: {
     width: 10,
-    /*borderColor: 'red',
-    borderWidth: 1,*/
     alignItems:'flex-end',
 
   },
@@ -373,10 +369,7 @@ const styles = {
   nextPage: {
     marginRight: 2,
     height:20,
-    /*height: 30,
-    width: 30,*/
-    /*borderColor: 'red',
-    borderWidth: 1,*/
+    width:10,
 
   },
   descripts: {
@@ -455,8 +448,6 @@ const styles = {
     marginRight:15,
     width: 65,
     height: 65,
-    /*borderColor: 'blue',
-    borderWidth: 1,*/
   },
   submit: {
     marginTop: 15,

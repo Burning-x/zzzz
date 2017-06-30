@@ -2,20 +2,8 @@
  * Created by admin on 2017/6/13.
  */
 
-/*
-static navigationOptions = ({ navigation }) => {
-  const {state, setParams} = navigation;
-  let inits = {
-    title: '扫码录入',
-  }
-  return {
-    title: 'hello',
-    header: <ReportHeader navigation={navigation} inits={inits}/>
-  }
-}*/
 import ReportHeader from './ReportHeader';
 import React, { Component } from 'react';
-//import { connect } from 'react-redux';
 import {
   View,
   Text,
@@ -32,7 +20,6 @@ import {
 
 const {width, height}  = Dimensions.get('window');
 
-//import {ToastMessage} from '../../utils/toast';
 import Camera from 'react-native-camera';
 import ViewFinder from './ViewFinder';
 
@@ -197,6 +184,38 @@ export default class Scan extends Component {
                     <View style={styles.fillView}/>
                   </View>
                 <View style={styles.bottomContainer}>
+                  <Text style={styles.infoText}>请对准设备上的二维码</Text>
+                  <View style={styles.selfAndLight}>
+                    <View style={styles.handContainer}>
+                      <TouchableOpacity
+                        style={styles.something}
+                        onPress={this._selfInput}>
+
+                        <View style={styles.flash}>
+                          <Image
+                            style={styles.hand}
+                            source={require('../images/troubleReport/report_1/手.png')}/>
+                          <Text style={styles.text}>
+                            手动录入
+                          </Text>
+                        </View>
+                      </TouchableOpacity>
+                      <View style={styles.flasha}></View>
+                      <TouchableOpacity
+                        style={styles.something}
+                        onPress={this._changeFlash}>
+                        <View style={styles.flash}>
+                          <Image
+                            style={styles.hand}
+                            source={require('../images/troubleReport/report_1/手电筒.png')}/>
+                          <Text style={styles.text}>
+                            开灯/关灯
+                          </Text>
+                        </View>
+                      </TouchableOpacity>
+                    </View>
+
+                  </View>
                   {/*<Text
                     style={[
                       styles.text,
@@ -210,23 +229,8 @@ export default class Scan extends Component {
                   >
                     将运单上的条码放入框内即可自动扫描。
                   </Text>*/}
-                  <TouchableOpacity onPress={this._selfInput}>
-                    <View style={styles.flash}>
-                      <Text style={styles.icon}>&#xe61a;</Text>
-                      <Text style={styles.text}>
-                        手动录入
-                      </Text>
-                    </View>
-                  </TouchableOpacity>
-                  <View style={styles.flasha}></View>
-                  <TouchableOpacity onPress={this._changeFlash}>
-                    <View style={styles.flash}>
-                      <Text style={styles.icon}>&#xe61a;</Text>
-                      <Text style={styles.text}>
-                        开灯/关灯
-                      </Text>
-                    </View>
-                  </TouchableOpacity>
+
+
                 </View>
               </Camera>
             );
@@ -277,11 +281,11 @@ const styles =StyleSheet.create({
     width: width,
     height: height,
   },
-  flash: {
+  /*flash: {
     marginTop: 40,
     flexDirection: 'row',
 
-  },
+  },*/
   flasha: {
     width:40,
   },
@@ -308,7 +312,7 @@ const styles =StyleSheet.create({
         height: 80,
       },
       android: {
-        height: (height - 285) / 2,
+        height: (height - 325) / 2,
       }
     }),
     width:width,
@@ -316,14 +320,30 @@ const styles =StyleSheet.create({
     opacity:0.5
   },
   bottomContainer:{
-    flexDirection: 'row',
-    justifyContent: 'center',
+    flexDirection: 'column',
+    //justifyContent: 'center',
     //alignItems:'center',
     backgroundColor:'black',
     //alignSelf:'center',
     opacity:0.5,
     flex:1,
-    width:width
+    width:width,
+  },
+  selfAndLight: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  handContainer: {
+    marginTop: 30,
+    flexDirection: 'row',
+  },
+  infoText: {
+    marginTop: 5,
+    color: 'white',
+    textAlign: 'center',
+  },
+  hand: {
+    alignSelf: 'center',
   },
   fillView:{
     width:(width-220)/2,
@@ -335,6 +355,6 @@ const styles =StyleSheet.create({
     width:220,
     height:220,
     alignSelf:'center'
-  }
+  },
 
 })

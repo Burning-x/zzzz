@@ -56,23 +56,31 @@ export default class History extends Component {
         <View style={stylesHeader.title}>
           <Text style={stylesHeader.titleName}>历史记录</Text>
         </View>
+        <View style={stylesHeader.empty}></View>
       </View>
     }
   };
   _getItems(data) {
     return (
       <View style={styles.outer}>
-        <View>
-          <Image source={require("../images/troubleReport/history/滑块.png")}/>
-          <Text style={styles.timestamp}>{data.timestamp}</Text>
-        </View>
+        <View style={styles.darkline}></View>
+        <Image
+          style={styles.smart}
+          source={require("../images/troubleReport/history/滑块.png")}/>
         <View style={styles.outerContent}>
-          <Text>设备编号:  {data.code}</Text>
+          <Text style={styles.timestamp}>{data.timestamp}</Text>
+          <Text style={styles.deviceCode}>设备编号:  {data.code}</Text>
           <View style={styles.approverName}>
-            <Image source={require('../images/troubleReport/history/设备名称.png')}/>
+            <Image
+              style={styles.imageMargin}
+              source={require('../images/troubleReport/history/设备名称.png')}/>
             <Text style={styles.approver}>设备名称：{data.approver}</Text>
-            <Image source={require('../images/troubleReport/history/审批人.png')}/>
-            <Text style={styles.titlename}>审批人： {data.titlename}</Text>
+            <Image
+              style={styles.imageMargin}
+              source={require('../images/troubleReport/history/审批人.png')}/>
+            <Text
+              numberOfLines={1}
+              style={styles.titlename}>审批人： {data.titlename}</Text>
           </View>
 
         </View>
@@ -82,7 +90,6 @@ export default class History extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.darkline}></View>
         <ListView
           style={styles.historyContainer}
           dataSource={this.state.dataSource}
@@ -119,52 +126,51 @@ const stylesHeader = StyleSheet.create({
     flex: 2,
     justifyContent: 'center',
   },
-  history: {
-    alignSelf: 'center',
-    justifyContent: 'center',
-    fontSize: 12,
-    color: '#ffffff',
-  }
-})
+  empty: {
+    flex: 2,
+  },
+});
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
-    borderWidth: 1,
-    /*justifyContent: 'center',*/
-    //alignItems: 'center',
+    backgroundColor: '#ffffff',
     flexDirection: 'row',
   },
+  imageMargin: {
+    marginTop: 3,
+    marginRight: 2,
+  },
   darkline: {
-    marginTop: 21,
-    marginLeft: 20,
-    height: height,
+    height: 82,
+    marginLeft: 2,
     width: 3,
     backgroundColor: '#ccc',
   },
+  smart: {
+    marginLeft: -5,
+  },
   historyContainer: {
-    marginLeft: -35,
-    marginTop: 20,
-    /*borderWidth: 1,
-    borderColor: 'red',*/
+    //marginLeft: -35,
+    paddingTop: 20,
+    marginBottom: 20,
+    //marginTop: 20,
   },
   outer: {
-    flexDirection: 'column',
+    flexDirection: 'row',
     marginLeft: 30,
-    /*borderWidth: 1,
-    borderColor: 'red',*/
   },
   outerContent: {
-    borderWidth: 1,
-    borderColor: 'yellow',
     marginLeft: 20,
     marginBottom: 20,
   },
+  deviceCode: {
+    fontSize: 12,
+  },
   approverName: {
+    marginTop: 5,
     flexDirection: 'row',
   },
   timestamp: {
-    marginLeft: 20,
     fontSize: 18,
   },
   approver: {
@@ -174,6 +180,6 @@ const styles = StyleSheet.create({
   },
   titlename: {
     fontSize: 12,
-    marginLeft: 10,
+    //marginLeft: 10,
   },
 });

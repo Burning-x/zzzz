@@ -65,9 +65,8 @@ export default class SelfInput extends Component {
   }
   render() {
     return (
-      <View style={{padding: 10}}>
-        <View>
-
+      <View style={styles.container}>
+        <View >
           <View>
             <TextInput
               autoCapitalize="characters"
@@ -102,6 +101,7 @@ export default class SelfInput extends Component {
 const styles = StyleSheet.create({
   container: {
     flex:1,
+    backgroundColor: '#ffffff',
   },
 
   textInput: {

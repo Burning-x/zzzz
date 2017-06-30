@@ -36,13 +36,15 @@ export default class Complete extends Component {
         <View style={stylesHeader.title}>
           <Text style={stylesHeader.titleName}>工单处理</Text>
         </View>
-      </View>,
+        <View style={stylesHeader.empty}>
+        </View>
+        </View>,
       tabBarLabel: '已完成',
     }
   };
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <Text>c完成</Text>
       </View>
     )
@@ -56,20 +58,29 @@ const stylesHeader = StyleSheet.create({
   },
   back: {
     justifyContent: 'center',
-    flex: 1,
+    flex: 2,
   },
   backPic: {
     alignSelf: 'center',
     justifyContent: 'center',
   },
   title: {
-    flex: 6,
+    flex: 5,
     justifyContent: 'center',
     //alignSelf: 'center',
+  },
+  empty: {
+    flex: 2,
   },
   titleName: {
     textAlign:'center',
     color: '#ffffff',
     fontSize: 17,
   },
+});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+  }
 })

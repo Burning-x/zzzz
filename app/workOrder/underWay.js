@@ -57,6 +57,8 @@ export default class UnderWay extends Component {
         <View style={stylesHeader.title}>
           <Text style={stylesHeader.titleName}>工单处理</Text>
         </View>
+        <View style={stylesHeader.empty}>
+        </View>
       </View>,
       tabBarLabel: '进行中',
     }
@@ -94,6 +96,7 @@ export default class UnderWay extends Component {
   render() {
     return (
         <ListView
+          style={styles.container}
             dataSource={this.state.dataSource}
             renderRow={this._getList}
         />
@@ -108,16 +111,19 @@ const stylesHeader = StyleSheet.create({
   },
   back: {
     justifyContent: 'center',
-    flex: 1,
+    flex: 2,
   },
   backPic: {
     alignSelf: 'center',
     justifyContent: 'center',
   },
   title: {
-    flex: 6,
+    flex: 5,
     justifyContent: 'center',
     alignSelf: 'center',
+  },
+  empty: {
+    flex: 2,
   },
   titleName: {
     textAlign:'center',
@@ -126,6 +132,9 @@ const stylesHeader = StyleSheet.create({
   },
 });
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+  },
   outerContent: {
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',

@@ -51,7 +51,7 @@ export default class OrderTraffic extends Component {
           <View style={styles.inContainer}>
             <View style={styles.marginLeft}>
               <Text style={styles.leftText}>工单类型</Text>
-              <Text style={styles.leftText}>故障单</Text>
+              <Text style={styles.rightText}>故障单</Text>
             </View>
           </View>
 
@@ -59,25 +59,25 @@ export default class OrderTraffic extends Component {
           <View style={styles.inContainer}>
             <View style={styles.marginLeft}>
               <Text style={styles.leftText}>设备编号</Text>
-              <Text style={styles.leftText}>{data.deviceId}</Text>
+              <Text style={styles.rightText}>{data.deviceId}</Text>
             </View>
           </View>
           <View style={styles.inContainer}>
             <View style={styles.marginLeft}>
               <Text style={styles.leftText}>设备名称</Text>
-              <Text style={styles.leftText}>{data.deviceName}</Text>
+              <Text style={styles.rightText}>{data.deviceName}</Text>
             </View>
           </View>
           <View style={styles.inContainer}>
             <View style={styles.marginLeft}>
               <Text style={styles.leftText}>区域位置</Text>
-              <Text style={styles.leftText}>{data.location}</Text>
+              <Text style={styles.rightText}>{data.location}</Text>
             </View>
           </View>
           <View style={styles.inContainer}>
             <View style={styles.marginLeft}>
               <Text style={styles.leftText}>故障描述</Text>
-              <Text style={styles.leftText}>{data.content}</Text>
+              <Text style={styles.rightText}>{data.content}</Text>
             </View>
           </View>
           <View style={styles.inContainer}>
@@ -88,13 +88,13 @@ export default class OrderTraffic extends Component {
           <View style={styles.inContainer}>
             <View style={styles.marginLeft}>
               <Text style={styles.leftText}>联系厂家</Text>
-              <Text style={styles.leftText}>{data.factory}</Text>
+              <Text style={styles.rightText}>{data.factory}</Text>
             </View>
           </View>
           <View style={styles.inContainer}>
             <View style={styles.marginLeft}>
               <Text style={styles.leftText}>截止日期</Text>
-              <Text style={styles.leftText}>{data.lastdate}</Text>
+              <Text style={styles.rightText}>{data.lastdate}</Text>
             </View>
           </View>
 
@@ -123,6 +123,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection:'column',
+    backgroundColor: '#ffffff'
   },
   outerContainer: {
     flex: 7,
@@ -134,6 +135,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderBottomColor: '#ccc',
     borderBottomWidth: 1,
+    flexDirection: 'column',
     /*borderWidth: 1,
     borderColor:'red',*/
   },
@@ -151,6 +153,9 @@ const styles = StyleSheet.create({
     width: 100,
     /*borderWidth: 1,
     borderColor:'red',*/
+  },
+  rightText: {
+    marginRight: 10,
   },
   bottomContainer: {
     flex: 4,

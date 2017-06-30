@@ -105,6 +105,7 @@ export default class OrderTraffic extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#ffffff'
   },
   outerContainer: {
     flex: 7,
