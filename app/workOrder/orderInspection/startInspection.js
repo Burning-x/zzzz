@@ -55,7 +55,7 @@ export default class OrderTraffic extends Component {
           <View style={styles.inContainer}>
             <View style={styles.marginLeft}>
               <Text style={styles.leftText}>设备编号</Text>
-              <Text style={styles.leftText}>{data.deviceId}</Text>
+              <Text style={styles.leftText}>{this.props.navigation.state.params.data.deviceId}</Text>
             </View>
           </View>
 

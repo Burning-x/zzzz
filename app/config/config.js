@@ -17,5 +17,13 @@ module.exports = {
     getCode: 'weyland/getCode',
     getHistory: 'weyland/history',
     getTrcList: 'weyland/trclist',
-  }
+  },
+    local:{
+        base:"http://192.168.199.128:3000/android/",
+        getHistory:'history',
+        getTrcList:'trclist',
+        
+    }
+    
+
 }

@@ -42,14 +42,15 @@ class MainList extends Component {
   }
   componentDidMount() {
     let that = this;
-    let url = config.api.base + config.api.getTrcList;
+    let url = config.local.base + config.local.getTrcList;
     request.get(url,{
       accessToken: 'aaaa',
     })
       .then((data) => {
-      let mockData = Mock.mock(data);
+      console.log(data);
+      //let mockData = Mock.mock(data);
       that.setState({
-        dataSource: that.state.dataSource.cloneWithRows(mockData.data),
+        dataSource: that.state.dataSource.cloneWithRows(data),
       });
       })
 

@@ -178,7 +178,7 @@ export default class Scan extends Component {
                           })
                         }]
                       }]}>
-                        <Image source={require('../images/troubleReport/report_1/扫描线.png')}/>
+                        <Image source={require('../images/troubleReport/report_1/scan.png')}/>
                       </Animated.View>
                     </View>
                     <View style={styles.fillView}/>
@@ -194,7 +194,7 @@ export default class Scan extends Component {
                         <View style={styles.flash}>
                           <Image
                             style={styles.hand}
-                            source={require('../images/troubleReport/report_1/手.png')}/>
+                            source={require('../images/troubleReport/report_1/hand.png')}/>
                           <Text style={styles.text}>
                             手动录入
                           </Text>
@@ -207,7 +207,7 @@ export default class Scan extends Component {
                         <View style={styles.flash}>
                           <Image
                             style={styles.hand}
-                            source={require('../images/troubleReport/report_1/手电筒.png')}/>
+                            source={require('../images/troubleReport/report_1/flashlight.png')}/>
                           <Text style={styles.text}>
                             开灯/关灯
                           </Text>

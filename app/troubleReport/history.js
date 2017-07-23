@@ -15,11 +15,10 @@ import {
 
 import request from '../config/request';
 import config from '../config/config';
-import Mock from 'mockjs';
+//import Mock from 'mockjs';
 const {width, height} = Dimensions.get('window');
 export default class History extends Component {
   _onChangeText(newText) {
-    console.log('input:' + newText)
   }
   constructor(props) {
     super(props);
@@ -31,13 +30,12 @@ export default class History extends Component {
 
   componentDidMount() {
     let that = this;
-    let url = config.api.base + config.api.getHistory;
+    let url = config.local.base + config.local.getHistory;
     request.get(url,{accessToken:'hhhhhhh'})
       .then((data) => {
-      let s = Mock.mock(data);
-      console.log(s.data);
+      //let s = Mock.mock(data);//关闭mock数据
         that.setState({
-          dataSource:that.state.dataSource.cloneWithRows(s.data),
+          dataSource:that.state.dataSource.cloneWithRows(data),
         })
       })
   }
@@ -51,7 +49,7 @@ export default class History extends Component {
           onPress={() => navigation.goBack()}>
           <Image
             style={stylesHeader.backPic}
-            source={require('../images/troubleReport/report_1/返回箭头.png')}/>
+            source={require('../images/troubleReport/report_1/back.png')}/>
         </TouchableOpacity>
         <View style={stylesHeader.title}>
           <Text style={stylesHeader.titleName}>历史记录</Text>
@@ -66,18 +64,18 @@ export default class History extends Component {
         <View style={styles.darkline}></View>
         <Image
           style={styles.smart}
-          source={require("../images/troubleReport/history/滑块.png")}/>
+          source={require("../images/troubleReport/history/slipper.png")}/>
         <View style={styles.outerContent}>
           <Text style={styles.timestamp}>{data.timestamp}</Text>
           <Text style={styles.deviceCode}>设备编号:  {data.code}</Text>
           <View style={styles.approverName}>
             <Image
               style={styles.imageMargin}
-              source={require('../images/troubleReport/history/设备名称.png')}/>
+              source={require('../images/troubleReport/history/equname.png')}/>
             <Text style={styles.approver}>设备名称：{data.approver}</Text>
             <Image
               style={styles.imageMargin}
-              source={require('../images/troubleReport/history/审批人.png')}/>
+              source={require('../images/troubleReport/history/approval.png')}/>
             <Text
               numberOfLines={1}
               style={styles.titlename}>审批人： {data.titlename}</Text>

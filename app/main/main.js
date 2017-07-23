@@ -51,7 +51,7 @@ export default class Main extends Component{
       <View style={styles.container}>
         <View style={styles.header}>
           <Image
-            source={require('../images/main/组-1.png')}
+            source={require('../images/main/group.png')}
             style={styles.headerUp}>
             <View style={styles.headertemp}>
               <Text style={styles.headerUpTemp}>17</Text>
@@ -64,25 +64,25 @@ export default class Main extends Component{
               </View>
               <Image
                 style={styles.headerWeather}
-                source={require('../images/main/多云图标.png')}/>
+                source={require('../images/main/cloudicon.png')}/>
             </View>
 
           </Image>
 
           <View style={styles.headerDown}>
             <TouchableOpacity style={styles.headerDownLeft}>
-              <Image source={require('../images/main/报警提示.png')}/>
+              <Image source={require('../images/main/alarm.png')}/>
               <Text style={styles.headerText}>报警提示</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.headerDownMid}>
-              <Image source={require('../images/main/巡线检查.png')}/>
+              <Image source={require('../images/main/check.png')}/>
               <Text style={styles.headerText}>日常巡检</Text>
             </TouchableOpacity>
               <TouchableOpacity
                 style={styles.headerDownRight}
                 onPress={() => navigate('Report')}
               >
-                  <Image source={require('../images/main/故障上报.png')}/>
+                  <Image source={require('../images/main/trfreport.png')}/>
                   <Text style={styles.headerText}>日常上报</Text>
               </TouchableOpacity>
           </View>
@@ -92,18 +92,18 @@ export default class Main extends Component{
             <View style={styles.contenMidInTop}>
               <TouchableOpacity style={styles.contenMidInTopLeft}
                                 onPress={() => navigate('OrderProcess')}>
-                <Image source={require('../images/main/工单.png')}/>
+                <Image source={require('../images/main/report.png')}/>
                 <Text style={styles.headerText}>工单处理</Text>
                 <Text style={styles.headerTextHandle}>您有5条工单未处理</Text>
               </TouchableOpacity>
               <View style={styles.contenMidInTopRight}>
                 <View style={styles.contenMidInTopUp}>
-                  <Image source={require('../images/main/人员定位.png')}/>
+                  <Image source={require('../images/main/personlocation.png')}/>
                   <Text style={styles.headerText}>人员定位</Text>
                   <Text style={styles.headerTextHandle}>附近500米有求助</Text>
                 </View>
                 <View style={styles.contenMidInTopDown}>
-                  <Image source={require('../images/main/设备控制.png')}/>
+                  <Image source={require('../images/main/equcontrol.png')}/>
                   <Text style={styles.headerText}>设备控制</Text>
                   <Text style={styles.headerTextHandle}>您有三台设备有异常</Text>
                 </View>
@@ -111,12 +111,12 @@ export default class Main extends Component{
             </View>
             <View style={styles.contenMidInBot}>
               <View style={styles.contenMidInBotLeft}>
-                <Image source={require('../images/main/视频监控.png')}/>
+                <Image source={require('../images/main/video.png')}/>
                 <Text style={styles.headerText}>视频通话</Text>
                 <Text style={styles.headerTextHandle}>实时监控已关闭</Text>
               </View>
               <View style={styles.contenMidInBotRight}>
-                <Image source={require('../images/main/环境监测.png')}/>
+                <Image source={require('../images/main/enviroment.png')}/>
                 <Text style={styles.headerText}>视频通话</Text>
                 <Text style={styles.headerTextHandle}>实时监控已关闭</Text>
               </View>
