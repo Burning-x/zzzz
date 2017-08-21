@@ -29,10 +29,13 @@ export default class History extends Component {
   }
 
   componentDidMount() {
+    console.log("fffff");
     let that = this;
     let url = config.local.base + config.local.getHistory;
     request.get(url,{accessToken:'hhhhhhh'})
       .then((data) => {
+      console.log(data);
+      console.log("abcabc")
       //let s = Mock.mock(data);//关闭mock数据
         that.setState({
           dataSource:that.state.dataSource.cloneWithRows(data),
@@ -66,19 +69,19 @@ export default class History extends Component {
           style={styles.smart}
           source={require("../images/troubleReport/history/slipper.png")}/>
         <View style={styles.outerContent}>
-          <Text style={styles.timestamp}>{data.timestamp}</Text>
-          <Text style={styles.deviceCode}>设备编号:  {data.code}</Text>
+          <Text style={styles.timestamp}>{data.time}</Text>
+          <Text style={styles.deviceCode}>设备编号:  {data.deviceId}</Text>
           <View style={styles.approverName}>
             <Image
               style={styles.imageMargin}
               source={require('../images/troubleReport/history/equname.png')}/>
-            <Text style={styles.approver}>设备名称：{data.approver}</Text>
+            <Text style={styles.approver}>设备名称：{data.deviceName}</Text>
             <Image
               style={styles.imageMargin}
               source={require('../images/troubleReport/history/approval.png')}/>
             <Text
               numberOfLines={1}
-              style={styles.titlename}>审批人： {data.titlename}</Text>
+              style={styles.titlename}>审批人： {data.history_approver}</Text>
           </View>
 
         </View>

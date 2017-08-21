@@ -40,21 +40,36 @@ class MainList extends Component {
     }
 
   }
-  componentDidMount() {
+  /*componentDidMount() {
     let that = this;
-    let url = config.local.base + config.local.getTrcList;
-    request.get(url,{
-      accessToken: 'aaaa',
-    })
+    let url = config.local.base + config.local.getHistory;
+		 request.get(url,{accessToken:'hhhhhhh'})
       .then((data) => {
-      console.log(data);
+		   console.log("eeeeeeeeeeee");
+      console.log(data.json());
+      console.log("ffffffffffff")
       //let mockData = Mock.mock(data);
       that.setState({
         dataSource: that.state.dataSource.cloneWithRows(data),
       });
       })
-
-  }
+  }*/
+	 
+	 componentDidMount() {
+			console.log("fffff");
+			let that = this;
+			let url = config.local.base + config.local.getHistory;
+			request.get(url,{accessToken:'hhhhhhh'})
+				.then((data) => {
+					 console.log(data);
+					 console.log("abcabc")
+					 //let s = Mock.mock(data);//关闭mock数据
+					 that.setState({
+							dataSource:that.state.dataSource.cloneWithRows(data),
+					 })
+				})
+	 }
+  
   _inspecting() {
 
   }
@@ -66,9 +81,10 @@ class MainList extends Component {
 
   _getList(data) {
     let { navigate } = this.props.navigation;
-    const orderArr = {'t3': '保养单','t2': '故障单','t1': '巡检单'};
-    const orderPage = {'t1': 'StartInspection','t2': 'OrderTraffic','t3': 'OrderMaintain'};
-    let type = "";
+    //const orderArr = {'t3': '保养单','t2': '故障单','t1': '巡检单'};
+    //const orderPage = {'t1': 'StartInspection','t2': 'OrderTraffic','t3': 'OrderMaintain'};
+    let type = "t1";
+    //console.log(typeof data.orderType)
     if (data.orderType < 10) {
       type = 't1';
     } else if (10 <= data.orderType < 20) {
@@ -79,16 +95,16 @@ class MainList extends Component {
 
     return (
     <TouchableOpacity
-      onPress={() => navigate(orderPage[type], data={data})}
+      onPress={() => navigate('OrderTraffic', data={data})}
       style={styles.outerContent}>
       <View style={styles.orderContent}>
         <View style={styles.allTitle}>
-          <Text style={styles.titleText}>{data.title}</Text>
+          <Text style={styles.titleText}>{data.info}</Text>
           <Text style={styles.ordered}>{data.ordered ? '完成' : '未完成'}</Text>
         </View>
         <View style={styles.timestamp}>
-          <Text style={styles.orderColor}>工单类型：{orderArr[type]}</Text>
-          <Text style={styles.orderColor}>截止日期：{data.lastdate}</Text>
+          <Text style={styles.orderColor}>工单类型：故障单</Text>
+          <Text style={styles.orderColor}>截止日期：{data.time}</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -103,7 +119,7 @@ class MainList extends Component {
           onPress={() => navigation.dispatch(resetAction)}>
           <Image
             style={stylesHeader.backPic}
-            source={require('../images/troubleReport/report_1/返回箭头.png')}/>
+            source={require('../images/troubleReport/report_1/back.png')}/>
         </TouchableOpacity>
         <View style={stylesHeader.title}>
           <Text style={stylesHeader.titleName}>工单处理</Text>

@@ -54,12 +54,12 @@ export default class Main extends Component{
             source={require('../images/main/group.png')}
             style={styles.headerUp}>
             <View style={styles.headertemp}>
-              <Text style={styles.headerUpTemp}>17</Text>
+              <Text style={styles.headerUpTemp}>35</Text>
               <View style={styles.headerUpContent}>
                 <Text style={styles.air}>空气质量：优</Text>
                 <View style={styles.tempHum}>
-                  <Text style={styles.temp}>温度:17</Text>
-                  <Text style={styles.hum}>湿度: 17度</Text>
+                  <Text style={styles.temp}>温度:35</Text>
+                  <Text style={styles.hum}>湿度: 35度</Text>
                 </View>
               </View>
               <Image
@@ -94,7 +94,7 @@ export default class Main extends Component{
                                 onPress={() => navigate('OrderProcess')}>
                 <Image source={require('../images/main/report.png')}/>
                 <Text style={styles.headerText}>工单处理</Text>
-                <Text style={styles.headerTextHandle}>您有5条工单未处理</Text>
+                <Text style={styles.headerTextHandle}>您有2条工单未处理</Text>
               </TouchableOpacity>
               <View style={styles.contenMidInTopRight}>
                 <View style={styles.contenMidInTopUp}>

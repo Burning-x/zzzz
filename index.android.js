@@ -23,8 +23,9 @@ export default class zzzz extends Component {
   constructor() {
     super();
     this.state = {
-      loginEd: true,
+      loginEd: false,
       user: null,
+       password:null,
       accessToken: '',
     }
     this._afterLogin = this._afterLogin.bind(this);
@@ -33,6 +34,7 @@ export default class zzzz extends Component {
     this.componentDidMount = this.componentDidMount.bind(this);
   }
   componentDidMount() {
+    //AsyncStorage.removeItem("user");
     this._asyncAppStatus();
     setTimeout(function () {
       SplashScreen.hide();
@@ -41,14 +43,17 @@ export default class zzzz extends Component {
 
   _afterLogin(user) {
     user = JSON.stringify(user);
+    console.log(user);
+    
     AsyncStorage.setItem("user", user)
       .then(() => {
         this.setState({
           loginEd: true,
-          user: user,
+          user: user.username,
+           password:user.password
         })
       })
-    alert(this.state.loginEd + "")
+    //alert(this.state.loginEd + "")
   }
   _asyncAppStatus() {
     let that = this;

@@ -6,10 +6,8 @@ import Main from '../main/main'
 import {
   Alert,
   Image,
-  Navigator,
-  TouchableHighlight,
+   TouchableOpacity,
   TextInput,
-  AppRegistry,
   StyleSheet,
   Text,
   View
@@ -22,8 +20,8 @@ export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName:'',
-      passWord: null,
+      username:'',
+      password: null,
     }
     this._changePwd = this._changePwd.bind(this);
     this._changeUname = this._changeUname.bind(this);
@@ -31,12 +29,17 @@ export default class Login extends Component {
   }
   _login(){
     let that = this;
-    console.log(this.state);
-    let url = config.api.base + config.api.queryUser;
+    let url = config.local.base + config.local.queryUser;
+    console.log(url);
     let body = this.state;
-    request.post(url, body)
+    request.get(url, body)
       .then((data) => {
+      console.log("aaaa");
       if (data && data.success) {
+        let data = {
+          password:this.state.password,
+           username:this.state.username,
+        }
         that.props.afterLogin(data);
       } else {
         Alert.alert('用户名或者密码错误');
@@ -47,13 +50,13 @@ export default class Login extends Component {
   _changePwd(text) {
 
     this.setState({
-      passWord : text,
+      password : text,
     })
   }
   _changeUname(text) {
 
     this.setState({
-      userName : text,
+			 username : text,
     })
   }
   render()
@@ -79,10 +82,11 @@ export default class Login extends Component {
                   />
                 </View>
                 <TextInput
-                  placeholder='请输入密码'
+                  placeholder='请输入用户名'
                   autoCapitalize={'none'}
                   autoCorrect={false}
                   keyboardType={'number-pad'}
+                  
                   style={styles.noStyle}
                   onChangeText={(text) => {
                     this._changeUname(text);
@@ -102,6 +106,7 @@ export default class Login extends Component {
                   placeholder='请输入密码'
                   autoCapitalize={'none'}
                   autoCorrect={false}
+                  secureTextEntry={true}
                   keyboardType={'number-pad'}
                   style={styles.noStyle}
                   onChangeText={(text) => {
@@ -115,12 +120,12 @@ export default class Login extends Component {
         <View style={styles.loginBtnOut}>
           <Image
             source={require('../images/login/按钮.png')}>
-            <TouchableHighlight
+            <TouchableOpacity
               style={styles.touchH}
               onPress={this._login}
               >
               <Text style={styles.loginBtn}>登 录</Text>
-            </TouchableHighlight>
+            </TouchableOpacity>
           </Image>
         </View>
       </View>

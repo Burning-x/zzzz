@@ -30,14 +30,14 @@ export default class UnderWay extends Component {
   }
   componentDidMount() {
     let that = this;
-    let url = config.api.base + config.api.getTrcList;
+    let url = config.local.base + config.local.ontheway;
     request.get(url,{
       accessToken: 'aaaa',
     })
-        .then((data) => {
-          let mockData = Mock.mock(data);
-          that.setState({
-            dataSource: that.state.dataSource.cloneWithRows(mockData.data),
+      .then((data) => {
+          //let mockData = Mock.mock(data);
+         that.setState({
+            dataSource: that.state.dataSource.cloneWithRows(data),
           });
         })
 
@@ -52,7 +52,7 @@ export default class UnderWay extends Component {
           onPress={() => navigation.dispatch(resetAction)}>
           <Image
             style={stylesHeader.backPic}
-            source={require('../images/troubleReport/report_1/返回箭头.png')}/>
+            source={require('../images/troubleReport/report_1/back.png')}/>
         </TouchableOpacity>
         <View style={stylesHeader.title}>
           <Text style={stylesHeader.titleName}>工单处理</Text>
@@ -83,7 +83,7 @@ export default class UnderWay extends Component {
           <View style={styles.orderContent}>
             <View style={styles.allTitle}>
               <Text style={styles.titleText}>{data.title}</Text>
-              <Text style={styles.ordered}>{data.ordered ? '完成' : '未完成'}</Text>
+              <Text style={styles.ordered}>{data.ordered ? '完成' : '进行中'}</Text>
             </View>
             <View style={styles.timestamp}>
               <Text style={styles.orderColor}>工单类型：{orderArr[type]}</Text>

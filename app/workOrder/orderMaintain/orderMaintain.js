@@ -29,7 +29,7 @@ export default class OrderTraffic extends Component {
           onPress={() => navigation.goBack()}>
           <Image
             style={stylesHeader.backPic}
-            source={require('../../images/troubleReport/report_1/返回箭头.png')}/>
+            source={require('../../images/troubleReport/report_1/back.png')}/>
         </TouchableOpacity>
         <View style={stylesHeader.title}>
           <Text style={stylesHeader.titleName}>工单--保养</Text>

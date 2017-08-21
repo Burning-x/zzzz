@@ -36,7 +36,7 @@ export default class OrderTraffic extends Component {
           onPress={() => navigation.goBack()}>
           <Image
             style={stylesHeader.backPic}
-            source={require('../../images/troubleReport/report_1/返回箭头.png')}/>
+            source={require('../../images/troubleReport/report_1/back.png')}/>
         </TouchableOpacity>
         <View style={stylesHeader.title}>
           <Text style={stylesHeader.titleName}>故障上报</Text>
@@ -88,7 +88,7 @@ export default class OrderTraffic extends Component {
           </View>
           <View style={styles.inContainer}>
             <View style={styles.marginLeft}>
-              <Text>截止日期</Text>
+              <Text>截止日期aaa</Text>
             </View>
           </View>
         </View>

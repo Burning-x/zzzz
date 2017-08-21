@@ -9,6 +9,8 @@ import {
   TouchableOpacity,
   Dimensions,
   Image,
+	 Alert,
+	 Modal,
 } from 'react-native';
 
 import config from '../../config/config';
@@ -21,7 +23,9 @@ export default class OrderTraffic extends Component {
     super(props);
     this.state = {
       data: props.navigation.state.params.data,
+			 modalVisible:false,
     }
+    this._setModalVisable = this._setModalVisable.bind(this);
   }
   static navigationOptions = ({ navigation }) => {//设置导航栏头部
     return {
@@ -31,22 +35,52 @@ export default class OrderTraffic extends Component {
           onPress={() => navigation.goBack()}>
           <Image
             style={stylesHeader.backPic}
-            source={require('../../images/troubleReport/report_1/返回箭头.png')}/>
+            source={require('../../images/troubleReport/report_1/back.png')}/>
         </TouchableOpacity>
         <View style={stylesHeader.title}>
-          <Text style={stylesHeader.titleName}>故障处理</Text>
+          <Text style={stylesHeader.titleName}>故障详情</Text>
         </View>
         <View style={stylesHeader.empty}>
         </View>
       </View>
     }
   };
+  
+  componentDidMount
+  _setModalVisable(){
+  	 let flag = this.state.modalVisible;
+  	 console.log(flag === true);
+  	 if (flag === true) {
+				this.setState({
+					 modalVisible:false,
+				})
+		 } else {
+				this.setState({
+					 modalVisible:true,
+				})
+  	 }
+	}
 
   render() {
     let { navigate } = this.props.navigation;
     let data = this.state.data;
     return (
       <View style={styles.container}>
+				 <Modal
+					 style={styles.modal}
+					 animationType={"slide"}
+					 transparent={false}
+					 visible={this.state.modalVisible}
+					 onRequestClose={() => {Alert("Modal has been closed.")}}>
+						<TouchableOpacity
+							style={styles.modalContent}
+							onPress={() => this._setModalVisable()}>
+							 {/*<Text style={styles.aaaa}>aaaa</Text>*/}
+							 <Image
+								 style={styles.aaaa}
+								 source={require("../../images/aaa.png")}/>
+						</TouchableOpacity>
+				 </Modal>
         <View  style={styles.outerContainer}>
           <View style={styles.inContainer}>
             <View style={styles.marginLeft}>
@@ -98,21 +132,27 @@ export default class OrderTraffic extends Component {
             </View>
           </View>
 
-          <View style={styles.inContainer}>
-            <Text>图片</Text>
-            <Image
-                source={{uri:data.image}}
-                style={styles.images}>
-            </Image>
+          <View style={styles.picContainer}>
+						 <View style={styles.picWarp}>
+								<Text>故障图片</Text>
+								<TouchableOpacity
+									style={styles.trifPic}
+									onPress={() => this._setModalVisable()}>
+									 <Image
+										 source={require('../../images/aaa.png')}
+										 style={styles.images}>
+									 </Image>
+								</TouchableOpacity>
+						 </View>
+          
           </View>
-
         </View>
         <View style={styles.bottomContainer}>
           <TouchableOpacity
-            onPress={() => navigate('EndTraffic')}
+            onPress={() => navigate('EndTraffic',data={data})}
             style={styles.startInspection}
           >
-            <Text style={styles.startText}>开始保养</Text>
+            <Text style={styles.startText}>开始处理</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -125,6 +165,21 @@ const styles = StyleSheet.create({
     flexDirection:'column',
     backgroundColor: '#ffffff'
   },
+	 modalContent:{
+  	 flex:1,
+  	 justifyContent:'center',
+  	 backgroundColor:'black',
+  	 //width:480,
+  	 /*width:width,
+			height:height,*/
+			//justifyContent:'center',
+			//alignItems:'center'
+	 },
+	 aaaa:{
+  	 width:370,
+			height:250,
+			
+	 },
   outerContainer: {
     flex: 7,
     flexDirection: 'column',
@@ -139,6 +194,20 @@ const styles = StyleSheet.create({
     /*borderWidth: 1,
     borderColor:'red',*/
   },
+	picContainer:{
+  	 flex:2,
+     borderBottomWidth:1,
+		 borderColor:'#ccc',
+    },
+	 picWarp:{
+  	 marginTop:10,
+  	 marginLeft:10,
+			flexDirection:'row',
+	 },
+	 trifPic:{
+  	 marginLeft:10,
+			marginTop:5,
+	 },
 
   marginLeft: {
     flexDirection: 'row',
@@ -158,7 +227,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   bottomContainer: {
-    flex: 4,
+    flex: 2,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -175,8 +244,8 @@ const styles = StyleSheet.create({
     color: '#ffffff',
   },
   images: {
-    height: 20,
-    width: 20,
+    height: 50,
+    width: 75,
   }
 });
 const stylesHeader = StyleSheet.create({

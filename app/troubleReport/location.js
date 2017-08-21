@@ -20,11 +20,9 @@ export default class Location extends Component {
   }
 
   _getLocation(data) {
-    console.log("aaa");
+
     let str = data.nativeEvent.data
     let sss = JSON.parse(str);
-    console.log(str);
-    console.log(sss);
   }
 
   render() {

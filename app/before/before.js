@@ -45,7 +45,7 @@ let Before = React.createClass({
 const styles = {
   container: {
     flex: 1,
-    flexDirection: 'column',
+    flexDirection: 'row',
     backgroundColor: '#5bb7F5',
   },
   content: {

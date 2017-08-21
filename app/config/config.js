@@ -19,11 +19,14 @@ module.exports = {
     getTrcList: 'weyland/trclist',
   },
     local:{
-        base:"http://192.168.199.128:3000/android/",
-        getHistory:'history',
-        getTrcList:'trclist',
-        
+        base:"http://192.168.199.127:3000/",
+        getHistory:'search/get_history',
+        getTrcList:'search/get_history',
+        getTrf:'trf',
+       getCode:'search/get_code',
+       queryUser:'search/get_user',
+       ontheway:'way',
+       upload_picture:'manage/insert_image',
+       complete:'complete',
     }
-    
-
 }

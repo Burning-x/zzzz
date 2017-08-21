@@ -73,7 +73,7 @@ export default class SelfInput extends Component {
               style={styles.textInput}
               maxLength={8}
               //autoFocus={true}
-              keyboardType="numeric"
+              keyboardType="default"
               placeholderTextColor="#9e9e9e"
               underlineColorAndroid="transparent"
               placeholder="请输入设备编号"

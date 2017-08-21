@@ -12,6 +12,8 @@ import {
 } from 'react-native';
 
 import { TabNavigator } from 'react-navigation';
+import config from '../config/config';
+import request from '../config/request';
 
 import { NavigationActions } from 'react-navigation'
 
@@ -22,6 +24,15 @@ const resetAction = NavigationActions.reset({
   ]
 });
 export default class Complete extends Component {
+	 constructor(props) {
+			super(props);
+			var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+			this.state = {
+				 dataSource: ds.cloneWithRows(['a1','b2']),
+			};
+			this._getList = this._getList.bind(this);
+			
+	 }
   static navigationOptions = ({ navigation }) => {//设置导航栏头部
     const {state, setParams} = navigation;
     return {
@@ -31,7 +42,7 @@ export default class Complete extends Component {
           onPress={() => navigation.dispatch(resetAction)}>
           <Image
             style={stylesHeader.backPic}
-            source={require('../images/troubleReport/report_1/返回箭头.png')}/>
+            source={require('../images/troubleReport/report_1/back.png')}/>
         </TouchableOpacity>
         <View style={stylesHeader.title}>
           <Text style={stylesHeader.titleName}>工单处理</Text>
@@ -42,11 +53,59 @@ export default class Complete extends Component {
       tabBarLabel: '已完成',
     }
   };
+	 
+	 componentDidMount() {
+			let that = this;
+			let url = config.local.base + config.local.complete;
+			request.get(url,{
+				 accessToken: 'aaaa',
+			})
+				.then((data) => {
+					 //let mockData = Mock.mock(data);
+					 that.setState({
+							dataSource: that.state.dataSource.cloneWithRows(data),
+					 });
+				})
+			
+	 }
+	 
+	 _getList(data) {
+			let { navigate } = this.props.navigation;
+			const orderArr = {'t3': '保养单','t2': '故障单','t1': '巡检单'};
+			const orderPage = {'t1': 'StartInspection','t2': 'OrderTraffic','t3': 'OrderMaintain'};
+			let type = "";
+			if (data.orderType < 10) {
+				 type = 't1';
+			} else if (10 <= data.orderType < 20) {
+				 type = 't2';
+			} else {
+				 type = 't3';
+			}
+			
+			return (
+        <View
+          onPress={() => navigate(orderPage[type], data={data})}
+          style={styles.outerContent}>
+          <View style={styles.orderContent}>
+            <View style={styles.allTitle}>
+              <Text style={styles.titleText}>{data.title}</Text>
+              <Text style={styles.ordered}>{data.ordered ? '完成' : '已完成'}</Text>
+            </View>
+            <View style={styles.timestamp}>
+              <Text style={styles.orderColor}>工单类型：{orderArr[type]}</Text>
+              <Text style={styles.orderColor}>截止日期：{data.lastdate}</Text>
+            </View>
+          </View>
+        </View>
+			)
+	 }
   render() {
     return (
-      <View style={styles.container}>
-        <Text>c完成</Text>
-      </View>
+      <ListView
+        style={styles.container}
+        dataSource={this.state.dataSource}
+        renderRow={this._getList}
+      />
     )
   }
 }
@@ -78,9 +137,42 @@ const stylesHeader = StyleSheet.create({
     fontSize: 17,
   },
 });
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ffffff',
-  }
-})
+	 container: {
+			backgroundColor: 'white',
+	 },
+	 outerContent: {
+			borderBottomWidth: 1,
+			borderBottomColor: '#ccc',
+	 },
+	 orderContent: {
+			margin: 15,
+	 },
+	 allTitle: {
+			flexDirection: 'row',
+			justifyContent: 'space-between',
+			/*borderColor: 'red',
+			 borderWidth: 1,*/
+	 },
+	 titleName: {
+			fontSize: 18,
+	 },
+	 titleText: {
+			fontSize: 15,
+	 },
+	 ordered: {
+			color: '#ccc',
+			fontSize: 12,
+	 },
+	 timestamp: {
+			marginTop: 12,
+			flexDirection: 'row',
+			justifyContent: 'space-between',
+	 },
+	 orderColor: {
+			fontSize: 12,
+			color: '#ccc',
+	 }
+	 
+});

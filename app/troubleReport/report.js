@@ -7,8 +7,10 @@ import {
   TextInput,
   Dimensions,
   TouchableOpacity,
+	 AsyncStorage,
   FlatList,
   StyleSheet,
+   Alert,
   Text,
   View
 } from 'react-native';
@@ -86,6 +88,7 @@ export default class Report extends Component {
     this._pickImage = this._pickImage.bind(this);
     this._submit = this._submit.bind(this);
     this._getInfo = this._getInfo.bind(this);
+    this._uploadPicture = this._uploadPicture.bind(this);
   }
   static navigationOptions = ({ navigation }) => {//设置导航栏头部
     const {state, setParams} = navigation;
@@ -96,7 +99,7 @@ export default class Report extends Component {
           onPress={() => navigation.dispatch(resetAction)}>
           <Image
             style={stylesHeader.backPic}
-            source={require('../images/troubleReport/report_1/返回箭头.png')}/>
+            source={require('../images/troubleReport/report_1/back.png')}/>
         </TouchableOpacity>
         <View style={stylesHeader.title}>
           <Text style={stylesHeader.titleName}>故障上报</Text>
@@ -114,17 +117,17 @@ export default class Report extends Component {
     if (params) {
         console.log(params.transCode);
 
-      let url = config.api.base + config.api.getCode;
-      let body = {deviceId: params.transCode};
-      request.post(url,body)
+      let url = config.local.base + config.local.getCode;
+      let body = {device_code: params.transCode};
+      request.get(url,body)
         .then((data) => {
-        let sss = Mock.mock(data);
+        console.log(data);
+        //let sss = Mock.mock(data);
           this.setState({
-            deviceId: params.transCode,
-            deviceName: sss.machine.name,
+            deviceId: data.device_code,
+            deviceName: data.device_name,
+             location:data.device_location,
           })
-       console.log(sss);
-       console.log("cccc");
       })
     }
   }
@@ -143,7 +146,9 @@ export default class Report extends Component {
         //console.log('User tapped custom button: ', response.customButton);
       }
       else {
-        let source = {key:{ uri: response.uri }};
+        //let source = {key:{ uri: response.uri }};
+				 let source = { key: {uri: 'data:image/jpeg;base64,' + response.data }};
+        console.log(source);
         let array = [];
         if (this.state.avatarSource && this.state.avatarSource.length) {
           array = this.state.avatarSource;
@@ -162,7 +167,6 @@ export default class Report extends Component {
     this.setState({
       text: newText
     })
-    console.log("hel");
   }
   _extraUniqueKey() {
     let key = "aa" + parseInt(Math.random() * 1000);
@@ -177,7 +181,7 @@ export default class Report extends Component {
       width = length % 3;
     }
     let array = [];
-    for(i = 0 ; i < pics.length; i++ ){
+    for(let i = 0 ; i < pics.length; i++ ){
       array.push(pics[i]);
     }
 
@@ -192,9 +196,71 @@ export default class Report extends Component {
         source={item.key}/>}
     />
   }
+	 /*
+	 componentDidMount() {//在组件渲染之前判断是否有属性
+			const {params} = this.props.navigation.state;
+			if (params) {
+				 console.log(params.transCode);
+				 
+				 let url = config.local.base + config.local.getTrf;
+				 let body = {deviceId: params.transCode};
+				 request.get(url,body)
+					 .then((data) => {
+							console.log(data);
+							console.log("abababaa")
+							//let sss = Mock.mock(data);
+							this.setState({
+								 deviceId: data.transCode,
+								 deviceName: data.name,
+								 location:data.loc,
+							})
+					 })
+			}
+	 }*/
+  
+  _uploadPicture(url, params){
+		 AsyncStorage.getItem('user')
+       .then((data) => {
+		   console.log(data);
+       })
+    request.post(url, params)
+      .then((data) => {
+      console.log("aaaaaaaaaaaaaaaa");
+      })
+    /*return new Promise(function (resolve, reject) {
+			 let formData = new FormData();
+			 for (let key in params) {
+					formData.append(key, params[key]);
+			 }
+			 let file = {uri:params.path,type:'application/octet-stream',name:"image.jpg"}
+			 formData.append("file", file);
+			 console.log("a");
+			 console.log(this.state.avatarSource);
+			 console.log("b");
+		})*/
+  }
   _submit() {
-    const { navigate } = this.props.navigation;
-    return navigate("Main");
+    /*if ((this.state.text === "") | (this.state.deviceId === "")) {
+      Alert.alert('请输入故障内容');
+      return;
+    }*/
+		 AsyncStorage.getItem('user')
+			 .then((user) => {
+		      console.log(user);
+					let url = config.local.base + config.local.upload_picture;
+					let data = this.state.avatarSource;
+					let formData = new FormData();
+					//let file = {uri: data};
+					formData.append("file",data);
+					formData.append("username",user);
+					formData.append("info", this.state.text);
+					formData.append("deviceId", this.state.deviceId);
+					this._uploadPicture(url, formData);
+					const { navigate } = this.props.navigation;
+					return this.props.navigation.dispatch(resetAction)
+			 })
+    
+    //return navigate("Main");
   }
 
   _getInfo(text) {
@@ -205,6 +271,8 @@ export default class Report extends Component {
   _onContentSizeChange() {
     console.log("cccc")
   }
+  
+  
   render(){
     const { navigate } = this.props.navigation;
     let that = this;
@@ -222,7 +290,7 @@ export default class Report extends Component {
                   onPress={() => navigate('QrCode',{user:this._getInfo})}>
                   <Image
                     style={styles.nextPage}
-                    source={require('../images/troubleReport/report_1/下一级.png')}/>
+                    source={require('../images/troubleReport/report_1/nextpage.png')}/>
                 </TouchableOpacity>
               </View>
 
@@ -233,21 +301,29 @@ export default class Report extends Component {
           <View style={[styles.items]}>
             <View  style={styles.itemMargin}>
               <Text style={styles.titleText}>设备名称</Text>
-              <Text>{that.state.deviceName}</Text>
+              <Text style={styles.equname}>{that.state.deviceName}</Text>
             </View>
           </View>
 
           <View style={[styles.items]}>
             <View  style={styles.itemMargin}>
-              <Text style={styles.titleText}>区域位置</Text>
+              <View style={styles.titlelocate}>
+                <Text>区域位置</Text>
+              </View>
+              <Text style={styles.equname}>{that.state.location}</Text>
+              {/*<TextInput style={styles.getlocate}
+                         placeholderTextColor="#9e9e9e"
+                         underlineColorAndroid="transparent" placeholder="请输入所在区域"/>*/}
+              {/*<Text style={styles.titleText}>区域位置</Text>
               <Text>{that.state.location}</Text>
-              <TouchableOpacity
+              <TextInput/>*/}
+              {/*<TouchableOpacity
                 style={styles.prCode}
                 onPress={() => navigate('Location',{user:this._getInfo})}>
                 <Image
                   style={styles.nextPage}
-                  source={require('../images/troubleReport/report_1/下一级.png')}/>
-              </TouchableOpacity>
+                  source={require('../images/troubleReport/report_1/nextpage.png')}/>
+              </TouchableOpacity>*/}
             </View>
           </View>
 
@@ -280,7 +356,7 @@ export default class Report extends Component {
                   <TouchableOpacity
                     onPress={this._pickImage}
                     style={styles.uploadPic}>
-                    <Image source={require('../images/troubleReport/report_1/上传图片.png')}/>
+                    <Image source={require('../images/troubleReport/report_1/uploadpic.png')}/>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -288,7 +364,7 @@ export default class Report extends Component {
 
               <TouchableOpacity
                 style={styles.submit}
-                onPress={() => this.props.navigation.dispatch(resetAction)}>
+                onPress={this._submit}>
                 <Text style={styles.submitBtn}>提   交</Text>
               </TouchableOpacity>
           </View>
@@ -355,7 +431,11 @@ const styles = {
   deviceIdAndScan: {
     flexDirection: 'row',
   },
+	 equname:{
+    marginRight:12,
+   },
   prCode: {
+    
     width: 10,
     alignItems:'flex-end',
 
@@ -363,6 +443,10 @@ const styles = {
   titleText: {
     fontSize:15,
   },
+	titlelocate:{
+    justifyContent:'center',
+    },
+	
   deviceId: {
     marginRight: 3,
   },
@@ -370,7 +454,6 @@ const styles = {
     marginRight: 2,
     height:20,
     width:10,
-
   },
   descripts: {
     borderBottomWidth:1,

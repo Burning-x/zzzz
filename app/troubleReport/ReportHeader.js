@@ -39,7 +39,7 @@ export default class ReportHeader extends Component {
           onPress={() => navigation.goBack()}>
           <Image
             style={styles.backPic}
-            source={require('../images/troubleReport/report_1/返回箭头.png')}/>
+            source={require('../images/troubleReport/report_1/back.png')}/>
         </TouchableOpacity>
         <View style={styles.title}>
           <Text style={styles.titleName}>{title}</Text>
